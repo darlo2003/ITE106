@@ -1,0 +1,98 @@
+import java.util.Scanner;
+
+class Lamp {
+    String name;
+    boolean isOn;
+
+    void turnOn() {
+        System.out.println(name + " is now ON.");
+    }
+
+    void turnOff() {
+        System.out.println(name + " is now OFF.");
+    }
+}
+
+public class Main {
+    static Scanner input = new Scanner(System.in);
+
+    static Lamp led = new Lamp();
+    static Lamp halogen = new Lamp();
+    static Lamp fluorescent = new Lamp();
+    static Lamp incandescent = new Lamp();
+
+    public static void main(String[] args) {
+        // Assign names to lamps
+        led.name = args[0];
+        halogen.name = args[1];
+        fluorescent.name = args[2];
+        incandescent.name = args[3];
+
+        // Set initial statuses
+        boolean initialStatus = Boolean.parseBoolean(args[4]);
+        led.isOn = initialStatus;
+        halogen.isOn = initialStatus;
+        fluorescent.isOn = initialStatus;
+        incandescent.isOn = initialStatus;
+
+        // Update lamp statuses based on the arguments
+        updateLampStatus(led, Boolean.parseBoolean(args[5]));
+        updateLampStatus(halogen, Boolean.parseBoolean(args[6]));
+        updateLampStatus(fluorescent, Boolean.parseBoolean(args[7]));
+        updateLampStatus(incandescent, Boolean.parseBoolean(args[8]));
+
+        // User interaction for changing lamp statuses
+        while (true) {
+            System.out.println("Do you want to change the status of the lamps? [YES | NO] ");
+            String user_input = input.next();
+
+            if (user_input.equalsIgnoreCase("YES")) {
+                // Get new statuses for each lamp
+                System.out.println("Type LED new status [true | false]: ");
+                boolean led_new_input = Boolean.parseBoolean(input.next());
+
+                System.out.println("Type Halogen new status [true | false]: ");
+                boolean halogen_new_input = Boolean.parseBoolean(input.next());
+
+                System.out.println("Type Fluorescent new status [true | false]: ");
+                boolean fluorescent_new_input = Boolean.parseBoolean(input.next());
+
+                System.out.println("Type Incandescent new status [true | false]: ");
+                boolean incandescent_new_input = Boolean.parseBoolean(input.next());
+
+                // Update statuses
+                updateLampStatus(led, led_new_input);
+                updateLampStatus(halogen, halogen_new_input);
+                updateLampStatus(fluorescent, fluorescent_new_input);
+                updateLampStatus(incandescent, incandescent_new_input);
+            } else if (user_input.equalsIgnoreCase("NO")) {
+                break;
+            }
+        }
+    }
+
+    public static void updateLampStatus(Lamp lamp, boolean newStatus) {
+        System.out.println("===" + lamp.name.toUpperCase() + "===");
+        if (lamp.isOn) {
+            if (newStatus) {
+                System.out.println("currently turned on");
+                lamp.turnOn();
+            } else {
+                System.out.println("currently turned on");
+                lamp.isOn = false;
+                lamp.turnOff();
+                System.out.println("turned off by " + lamp.name);
+            }
+        } else {
+            if (newStatus) {
+                System.out.println("currently turned off");
+                lamp.isOn = true;
+                lamp.turnOn();
+                System.out.println("turned on by " + lamp.name);
+            } else {
+                System.out.println("currently turned off");
+                lamp.turnOff();
+            }
+        }
+    }
+}
