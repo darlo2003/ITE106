@@ -1,18 +1,37 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
- 
-public class ReadingEntireFileWithoutLoop 
-{
-    public static void main(String[] args)
-        throws FileNotFoundException
-    {
-        File file = new File("C:\\Users\\pankaj\\Desktop\\test.txt");
-        Scanner sc = new Scanner(file);
- 
-        // we just need to use \\Z as delimiter
-        sc.useDelimiter("\\Z");
- 
-        System.out.println(sc.next());
+
+public class TextFileManipulationScannerWithoutLoop {
+    public static void main(String[] args) {
+      
+        String inputFilePath = "input.txt";  
+        String outputFilePath = "output.txt"; 
+
+        try {
+        
+            Scanner scanner = new Scanner(new File(inputFilePath));
+            StringBuilder fileContent = new StringBuilder();
+
+            while (scanner.hasNextLine()) {
+                fileContent.append(scanner.nextLine()).append(System.lineSeparator());
+            }
+
+            scanner.close();
+
+            String manipulatedContent = fileContent.toString().toUpperCase();
+
+            FileWriter writer = new FileWriter(outputFilePath);
+            writer.write(manipulatedContent);
+            writer.close();
+
+            System.out.println("File manipulation complete. Check output.txt.");
+        } catch (FileNotFoundException e) {
+            System.err.println("Input file not found: " + e.getMessage());
+        } catch (IOException e) {
+            System.err.println("Error writing to output file: " + e.getMessage());
+        }
     }
 }
