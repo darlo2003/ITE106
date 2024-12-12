@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 
-public class CalculatorNiRodNoFormatting extends JFrame implements ActionListener {
+public class CalculatorNoFormatting extends JFrame implements ActionListener {
 	
 	//===================Text Displays======================//
 	private JTextField textDisplay;
@@ -13,7 +13,7 @@ public class CalculatorNiRodNoFormatting extends JFrame implements ActionListene
 	private String operator;
 	private boolean done;
 	
-	public CalculatorNiRodNoFormatting() {
+	public CalculatorNoFormatting() {
 		//===================GUI Main Frame======================//
 		setTitle("Kalkyuleytor");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -166,6 +166,6 @@ public class CalculatorNiRodNoFormatting extends JFrame implements ActionListene
 		writer.write("");
 		writer.close();
 		
-		new CalculatorNiRodNoFormatting();
+		new CalculatorNoFormatting();
 	}
 }
