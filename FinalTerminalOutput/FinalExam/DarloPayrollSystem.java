@@ -5,7 +5,7 @@ import javax.swing.border.*;
 
 import java.io.*;
 
-public class TawPayrollSystem extends JFrame implements ActionListener {
+public class DarloPayrollSystem extends JFrame implements ActionListener {
 	
 	// declaration of 'global variables' that will be accessed in more than 1 method
 	// the text fields for the user input that the text (values) they contain will be saved into a file
@@ -504,6 +504,6 @@ public class TawPayrollSystem extends JFrame implements ActionListener {
 	}
 	
 	public static void main(String[] args) {
-		new TawPayrollSystem();
+		new DarloPayrollSystem();
 	}
 }
