@@ -13,7 +13,7 @@ public class Calculator extends JFrame implements ActionListener {
 	private String operator;
 	private boolean done;
 	
-	public CalculatorNiRod() {
+	public Calculator() {
 		//===================GUI Main Frame======================//
 		setTitle("Kalkyuleytor");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
