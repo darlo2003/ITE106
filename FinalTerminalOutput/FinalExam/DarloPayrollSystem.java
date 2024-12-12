@@ -17,7 +17,7 @@ public class DarloPayrollSystem extends JFrame implements ActionListener {
 	// link sa design layout ko, na sinunod ko (kinda) sa paggawa ng GUI - https://excalidraw.com/#json=PT5eN-oxhZ0pEwzQJeYKu,U6FnVaPMGv_nayrF4ql62g
 	
 	// constructor method when class is instantiated
-	public LanadaPayrollSystem() {
+	public DarloPayrollSystem() {
 		// Main GUI with fixed size
 		setTitle("Payroll System");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
