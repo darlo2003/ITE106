@@ -5,22 +5,20 @@ import java.io.*;
 
 public class Calculator extends JFrame implements ActionListener {
 	
-	//===================Text Displays======================//
 	private JTextField textDisplay;
 	private JTextArea historyDisplay;
-	//===================Functionality Variables======================//
+	
 	private double input1, input2, resultingValue;
 	private String operator;
 	private boolean done;
 	
 	public Calculator() {
-		//===================GUI Main Frame======================//
+	
 		setTitle("Kalkyuleytor");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(600, 500);
 		setLayout(new BorderLayout());
 		
-		//===================GUI Upper Text Display======================//
 		textDisplay = new JTextField();
 		textDisplay.setEditable(false);
 		textDisplay.setFont(new Font("Arial", Font.BOLD, 24));
@@ -30,12 +28,11 @@ public class Calculator extends JFrame implements ActionListener {
 		textDisplay.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		add(textDisplay, BorderLayout.NORTH);
 		
-		//===================GUI Buttons ======================//
 		JPanel buttonGroup = new JPanel();
 		buttonGroup.setBackground(Color.black);
 		buttonGroup.setForeground(Color.black);
-		buttonGroup.setLayout(new GridLayout(5, 4, 5, 5)); // 3rd and 4th argument is for spacing between buttons
-		buttonGroup.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Add padding around buttons
+		buttonGroup.setLayout(new GridLayout(5, 4, 5, 5)); 
+		buttonGroup.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); 
 		
 		String[] buttons = {
 			"7", "8", "9", "/",
@@ -50,7 +47,7 @@ public class Calculator extends JFrame implements ActionListener {
 			b.setFont(new Font("Arial", Font.BOLD, 24));
 			b.setBackground(Color.gray);
 			b.setForeground(Color.white);
-			b.setFocusPainted(false); // Removes focus border (yung may box na naka outline kung alin pinindot mo)
+			b.setFocusPainted(false);
 			b.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 5));
 			b.addActionListener(this);
 			buttonGroup.add(b);
@@ -58,7 +55,7 @@ public class Calculator extends JFrame implements ActionListener {
 		
 		add(buttonGroup, BorderLayout.CENTER);
 		
-		//===================GUI Left History Text Area======================//
+		
 		JPanel history = new JPanel();
 		history.setBackground(Color.black);
 		
@@ -74,7 +71,7 @@ public class Calculator extends JFrame implements ActionListener {
 		
 		add(history, BorderLayout.WEST);
 		
-		//===================GUI Frame Visibility======================//
+		
 		setVisible(true);
 	}
 
@@ -82,34 +79,34 @@ public class Calculator extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String calcuInput = e.getActionCommand();
 		
-		//===================If There is No Input And The First Input is 0======================//
+		
 		if (textDisplay.getText().length() <= 0 && calcuInput.equals("0")) {
 			return;
 		}
 		
-		//===================Reset Text Area And Values of Input1 And Input2 Variables======================//
+		
 		if (calcuInput.equals("C")) {
 			input1 = 0;
 			input2 = 0;
 			textDisplay.setText("");
 		}
-		//===================If Input is Digit or Dot (.)======================//
+		
 		else if (Character.isDigit(calcuInput.charAt(0)) || calcuInput.equals(".")) {
-			//===================To Avoid Writing The Next Input Into The Previous Output======================//
+			
 			if (done) {
 				textDisplay.setText("");
 				done = false;
 			}
 			
-			//===================If input is Dot (.) but there is already a Dot======================//
+			
 			if (calcuInput.equals(".") && textDisplay.getText().contains(".")) {
 				return;
 			}
 			
-			//===================Add the NEW Number or Dot (.) Input Into The Previous======================//
+			
 			textDisplay.setText(textDisplay.getText() + calcuInput);
 		}
-		//===================If Input Is Equal Sign (=)======================//
+		
 		else if (calcuInput.equals("=")) {
 			input2 = Double.parseDouble(textDisplay.getText());
 			calculate();
@@ -117,7 +114,7 @@ public class Calculator extends JFrame implements ActionListener {
 			
 			done = true;
 			
-			//===================Add to History======================//
+			
 			try {
 				String history = historyRecorder(
 						String.valueOf(input1) + " " +
@@ -131,7 +128,7 @@ public class Calculator extends JFrame implements ActionListener {
 				e1.printStackTrace();																																																																																																																							                                                                                                                                                                                                                                                                                                                                                          			// Gawa ni Mark Vincent D. Lanada BSCS2A
 			}
 		}
-		//===================If Input is NOT A Digit, Dot (.) or Equal Sign (=)======================//
+		/
 		else {
 			operator = calcuInput;
 			input1 = Double.parseDouble(textDisplay.getText());
@@ -159,7 +156,7 @@ public class Calculator extends JFrame implements ActionListener {
 	}
 
 	public String historyRecorder(String record) throws IOException {
-		//===================Reading FROM File======================//
+		
 		BufferedReader reader = new BufferedReader(new FileReader("calculator_history.txt"));
 		
 		String line;
@@ -171,7 +168,7 @@ public class Calculator extends JFrame implements ActionListener {
 		
 		history += record;
 		
-		//===================Writing INTO File======================//
+		
 		BufferedWriter writer = new BufferedWriter(new FileWriter("calculator_history.txt"));
 		writer.write(history);
 		
@@ -182,7 +179,7 @@ public class Calculator extends JFrame implements ActionListener {
 	}
 	
 	public static void main(String[] args) throws IOException {
-		//===================To Clear The Contents of The History File======================//
+		
 		BufferedWriter writer = new BufferedWriter(new FileWriter("calculator_history.txt"));
 		writer.write("");
 		writer.close();
