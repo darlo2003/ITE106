@@ -10,29 +10,29 @@ public class PhonebookSystem extends JFrame implements ActionListener {
 	private String filename = "phonebook.txt", selectedContact = "";
 	
 	public PhonebookSystem() {
-		//===================Main Frame ng GUI=================//
+		
 		setTitle("Phonebook System");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(400, 300);
 		setLayout(new BorderLayout());
 		
-		//===================Initialize ung mga variables/objects=================//
+		
 		eventField = new JTextField();
 		eventField.setEditable(false);
 		nameField = new JTextField();
 		phoneField = new JTextField();
 		displayArea = new JTextArea();
 		
-		//===================will hold the header and input panels=================//
+		
 		JPanel topPanels = new JPanel(new BorderLayout());
 		add(topPanels, BorderLayout.NORTH);
 		
-		// para sa display ng text about sa events or changes na nangyayari
+		
 		JPanel headerPanel = new JPanel(new BorderLayout());
 		headerPanel.add(eventField);
 		topPanels.add(headerPanel, BorderLayout.NORTH);
 		
-		//===================Name and Phone Number=================//
+		
 		JPanel inputPanel = new JPanel(new  GridLayout(2, 2));
 		inputPanel.add(new JLabel("Name:"));
 		inputPanel.add(nameField);
@@ -40,11 +40,10 @@ public class PhonebookSystem extends JFrame implements ActionListener {
 		inputPanel.add(phoneField);
 		topPanels.add(inputPanel, BorderLayout.SOUTH);
 		
-		//===================Scroll bars para sa display ng mga name and their corresponding phone numbers=================//
+		
 		JScrollPane scrollPane = new JScrollPane(displayArea);
 		add(scrollPane, BorderLayout.CENTER);
 		
-		//===================Buttons=================//
 		JPanel buttonPanel = new JPanel();
 		String[] buttons = {"Add", "Search", "Delete", "Select", "Update"};
 		for (String button : buttons) {
@@ -61,21 +60,20 @@ public class PhonebookSystem extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
 		
-		// e-clear lang yung nakasulat
+		
 		eventField.setText("");
 		
-		//
-		// Kung may empty kahit isa sa name or phone number. Disregard lang yung command
+		
 		if (nameField.getText().isEmpty() || phoneField.getText().isEmpty()) {
 			eventField.setText("Input field(s) are empty");
 			return;
 		}
-		// Kung kulang ang input sa phone number
+		
 		else if (phoneField.getText().length() != 11 || !phoneField.getText().startsWith("09")) {
 			eventField.setText("Phone number must be 11 digits long starting from 09");
 			return;
 		}
-		// Check kung lahat ba ng input sa phone number ay digits
+		
 		for (char c : phoneField.getText().toCharArray()) {
 			if (!Character.isDigit(c)) {
 				eventField.setText("Phone number must contain only digits");
@@ -106,11 +104,11 @@ public class PhonebookSystem extends JFrame implements ActionListener {
 		
 		try {
 			File file = new File(filename);
-			// Check kung nag e-exist na yung file natin, kung indi gagawin.
+			
 			if (!file.exists()) {
 			    file.createNewFile();
 			}
-			//===================Read FROM File======================//
+			
 			BufferedReader reader = new BufferedReader(new FileReader(filename));
 			while ((line = reader.readLine()) != null) {
 				contacts += line + System.lineSeparator();
@@ -139,7 +137,7 @@ public class PhonebookSystem extends JFrame implements ActionListener {
 			    file.createNewFile();
 			}
 			
-			//===================Read FROM File======================//
+			
 			BufferedReader reader = new BufferedReader(new FileReader(filename));
 			
 			while ((line = reader.readLine()) != null) {
@@ -163,7 +161,7 @@ public class PhonebookSystem extends JFrame implements ActionListener {
 			
 			contacts += name + ":" + phone;
 			
-			//===================Write INTO File======================//
+		
 			BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
 			writer.write(contacts);
 			
@@ -193,7 +191,6 @@ public class PhonebookSystem extends JFrame implements ActionListener {
 			    file.createNewFile();
 			}
 			
-			//===================Read FROM File======================//
 			BufferedReader reader = new BufferedReader(new FileReader(filename));
 			
 			while ((line = reader.readLine()) != null) {
@@ -216,7 +213,7 @@ public class PhonebookSystem extends JFrame implements ActionListener {
 				return;
 			}
 			
-			//===================Write INTO File======================//
+			
 			BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
 			writer.write(contacts);
 			
@@ -246,7 +243,6 @@ public class PhonebookSystem extends JFrame implements ActionListener {
 			    file.createNewFile();
 			}
 			
-			//===================Read FROM File======================//
 			BufferedReader reader = new BufferedReader(new FileReader(filename));
 			
 			while ((line = reader.readLine()) != null) {
@@ -266,7 +262,7 @@ public class PhonebookSystem extends JFrame implements ActionListener {
 				eventField.setText("Contact does not exist");
 			}
 			
-			//===================Write INTO File======================//
+			
 			BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
 			writer.write(contacts);
 			
@@ -293,7 +289,7 @@ public class PhonebookSystem extends JFrame implements ActionListener {
 			    file.createNewFile();
 			}
 			
-			//===================Read FROM File======================//
+			
 			BufferedReader reader = new BufferedReader(new FileReader(filename));
 			
 			while ((line = reader.readLine()) != null) {
@@ -310,7 +306,7 @@ public class PhonebookSystem extends JFrame implements ActionListener {
 			
 			eventField.setText("Contact does not exist");
 			
-			//===================Write INTO File======================//
+			
 			BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
 			writer.write(contacts);
 			
@@ -343,7 +339,7 @@ public class PhonebookSystem extends JFrame implements ActionListener {
 			    file.createNewFile();
 			}
 			
-			//===================Read FROM File======================//
+			
 			BufferedReader reader = new BufferedReader(new FileReader(filename));
 			
 			while ((line = reader.readLine()) != null) {
@@ -365,7 +361,7 @@ public class PhonebookSystem extends JFrame implements ActionListener {
 			contacts = selectedContact + System.lineSeparator() + contacts;
 			selectedContact = "";
 			
-			//===================Write INTO File======================//
+			
 			BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
 			writer.write(contacts);
 			
